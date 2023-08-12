@@ -17,14 +17,14 @@
     top: 2px;
 }
 
-.Navbar .search {
+.search {
     background-color: #EEF0FC;
     height: 1.5em;
     margin-right: -4%;
     border-radius: 7px;
 }
 
-.Navbar .search input {
+.search input {
     width: 27vw;
     border: none;
     background-color: transparent;
@@ -35,6 +35,11 @@
     padding: 5px; /* Padding for the input box */
     height: 2em; /* Set the desired height */
     vertical-align: middle; /* Vertically center the text */
+}
+
+
+.search-box:focus{
+    outline: none;
 }
 
 .Navbar .nav-items {
@@ -56,4 +61,49 @@
 
 .Navbar .settingIcon {
     width: 1.3em;
+}
+
+
+
+/* responsiveness */
+.search-resp{
+    display: none !important;
+    width: fit-content;
+    margin: 0 auto;
+    /* margin-left: auto; */
+}
+
+@media (max-width: 1200px) {
+    .search{
+        display: none !important;
+    }
+    .search-resp{
+        display: block !important;
+        height: fit-content;
+    }
+
+    .search-resp .search-box{
+        width: 23rem;
+        font-size: 1rem; /* Small text size */
+        padding: 5px; /* Padding for the input box */
+        /* height: 2.5em; /* Set the desired height */
+        vertical-align: middle; /* Vertically center the text */
+    }
+
+    .Navbar .bewakoofLogo {
+        height: 2.3vw;
+        margin-left: 2.3em;
+    }
+}
+@media (max-width: 680px) {
+    .nav-items{
+        display: none !important;
+    }
+    .search-resp .search-box{
+        width: 80vw;
+    }
+    .Navbar .bewakoofLogo {
+        height: 5vw;
+        margin-left: 1em;
+    }
 }

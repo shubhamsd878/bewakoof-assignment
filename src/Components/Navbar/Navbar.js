@@ -10,7 +10,7 @@ import { useData } from '../../DataContext';
 
 const Navbar = () => {
     const { state, dispatch } = useData();
-    
+
     const [active, setActive] = useState('/')
     // eslint-disable-next-line
     useEffect(() => {
@@ -20,26 +20,26 @@ const Navbar = () => {
 
     useEffect(() => {
     }, [])
-    
+
 
     const handleSearch = (e) => {
         let regex = new RegExp(e.target.value, 'i')
         // console.log( e.target.value )
-        const searchedResult = state.allProducts.filter( p => {
-            return regex.test( p.title ) || regex.test( p.description )
+        const searchedResult = state.allProducts.filter(p => {
+            return regex.test(p.title) || regex.test(p.description)
         })
 
-        dispatch({type:'set_products', payload: searchedResult})
+        dispatch({ type: 'set_products', payload: searchedResult })
 
 
     }
 
     return (
-        <>
+        <div>
             <div className="Navbar d-flex justify-content-between align-items-center px-3 mb-3">
                 <div>
                     <Link to='/' className='link-style'>
-                    <img className='bewakoofLogo' src={'https://images.bewakoof.com/web/ic-desktop-bwkf-trademark-logo.svg'} alt=''></img>
+                        <img className='bewakoofLogo' src={'https://images.bewakoof.com/web/ic-desktop-bwkf-trademark-logo.svg'} alt=''></img>
                     </Link>
                     {/* <p className='logo-text d-inline mx-1'>WASSERSTOFF</p> */}
                 </div>
@@ -55,17 +55,22 @@ const Navbar = () => {
                     <Link to='/category/electronics' onClick={() => { setActive('/category/electronics') }} className={`mx-3 ${active == '/category/electronics' ? 'active' : 'text-muted'}`} >Electronics</Link>
                 </div>
 
-                <div className='search d-flex align-items-baseline'>
-                    <input type="text" className="search-box" onChange={handleSearch}/>
-                    <CiSearch className="mx-2" size={15} />
+                <div className='search d-flex align-items-center'>
+                    <input type="text" className="search-box ms-1" onChange={handleSearch} placeholder='Search by Title or Description' />
+                    <CiSearch className="mx-2 " size={16} />
                 </div>
 
                 <div className="profile-nav-items">
-                    <span className='mx-3'><IoOptionsOutline size={22} /></span>
-                    <span className='mx-3'><FiUser size={22} /></span>
+                    <span className='mx-3 c-pointer'><IoOptionsOutline size={22} /></span>
+                    <span className='mx-3 c-pointer'><FiUser size={22} /></span>
                 </div>
             </div>
-        </>
+
+            <div className='search search-resp d-flex align-items-center'>
+                <input type="text" className="search-box ms-1" onChange={handleSearch} placeholder='Search by Title or Description' />
+                <CiSearch className="mx-2 " size={16} />
+            </div>
+        </div>
     )
 }
 
