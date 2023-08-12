@@ -1,0 +1,59 @@
+.Navbar {
+    height: 3em;
+    background-color: white;
+    position: sticky;
+    top: 0;
+}
+
+.Navbar .bewakoofLogo {
+    height: 1.8vw;
+    margin-left: 2.3em;
+}
+
+.Navbar .logo-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    position: relative;
+    top: 2px;
+}
+
+.Navbar .search {
+    background-color: #EEF0FC;
+    height: 1.5em;
+    margin-right: -4%;
+    border-radius: 7px;
+}
+
+.Navbar .search input {
+    width: 27vw;
+    border: none;
+    background-color: transparent;
+}
+
+.search-box {
+    font-size: 0.75rem; /* Small text size */
+    padding: 5px; /* Padding for the input box */
+    height: 2em; /* Set the desired height */
+    vertical-align: middle; /* Vertically center the text */
+}
+
+.Navbar .nav-items {
+    height: 100%;
+    align-items: center;
+}
+
+.Navbar .nav-items a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 3% 1%;
+}
+
+.Navbar .nav-items .active {
+    color: black;
+    font-weight: 500;
+    border-bottom: 4px solid blue;
+}
+
+.Navbar .settingIcon {
+    width: 1.3em;
+}

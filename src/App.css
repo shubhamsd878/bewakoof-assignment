@@ -1,0 +1,88 @@
+.link-style {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*  Products.js  */
+.products-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-around;
+  row-gap: 0.8rem;
+  column-gap: 0.5rem;
+
+
+}
+
+/*  Select CSS  */
+
+
+
+/*  ProductCard.js  */
+.product-card {
+  width: 18rem !important;
+  aspect-ratio: 3/4.3;
+  /* filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.05)); */
+}
+
+.product-card-img-top {
+  aspect-ratio: 3/4.3;
+  /* max-height: 10rem; */
+}
+
+/*  ProductItem.js  */
+.product-item-img {
+  width: 20rem;
+}
+
+
+/* Limit text to one line and add ellipsis */
+.single-line-ellipsis {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  /* Number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+
+.overlay-rating {
+  position: absolute;
+  top: 65%;
+
+  background-color: aliceblue;
+  padding: 0 0.6rem;
+  border-radius: 0px 4px 4px 0px;
+}
+
+
+.high-price {
+  text-decoration: line-through;
+  color: #bebebe;
+}
+
+/* product-item */
+.product-item-container img,
+.product-item-container > div {
+  width: 30%;
+}
+
+.product-item-container img {
+  /* position: sticky; */
+  height: fit-content;
+}
+
+/* product-item-details */
+.product-item-details .title {
+  color: #5f5f5f;
+}
+.product-item-details .description {
+  color: #8b8b8b;
+  font-size: 1.1rem;
+}
+.product-item-details .rating {
+  background-color: rgb(216, 216, 216);
+  padding: 0.3rem 0.6rem 0.4rem 0.4rem;
+  border: 1px solid black;
+}
