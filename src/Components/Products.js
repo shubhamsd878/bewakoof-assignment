@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import ProductItem from './ProductCard'
 import { Link, Outlet, useParams } from 'react-router-dom'
-
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useData } from '../DataContext';
+import { FaFilter } from 'react-icons/fa'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 
 import Slider from '@mui/material/Slider';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
-import { useData } from '../DataContext';
-
-import { FaFilter } from 'react-icons/fa'
 
 // for slider
 function valuetext(value) {
@@ -26,6 +28,7 @@ const Products = () => {
     const [minPrice, setMinPrice] = useState(0)
     const [maxPrice, setMaxPrice] = useState(0)
 
+    // fetching products
     useEffect(() => {
         if (!category) {
             fetch('https://fakestoreapi.com/products')
@@ -40,6 +43,7 @@ const Products = () => {
     }, [category]);
 
 
+    // calculating minPrice and maxPrice
     useEffect(() => {
         // updating minPrice & maxPrice
         const a = state.allProducts.reduce((min, product) => {
@@ -58,7 +62,7 @@ const Products = () => {
     }, [state.allProducts])
 
 
-
+    // fetching categories
     const [categories, setCategories] = useState([])
     useEffect(() => {
         fetch('https://fakestoreapi.com/products/categories')
@@ -93,7 +97,7 @@ const Products = () => {
 
 
 
-    // price range slider
+    // for handling price range slider
     const [value, setValue] = useState([-Infinity, Infinity]);
 
     const handlePriceRange = (e, newValue) => {
@@ -108,9 +112,35 @@ const Products = () => {
     }
 
 
+    // toggle Infinite Scroll 
+    const [isInfiniteToggle, setIsInfiniteToggle] = useState(false)
+
+    const handleInfinite = (e) => {
+        setIsInfiniteToggle(!isInfiniteToggle)
+        console.log(!isInfiniteToggle)
+    }
+
+    // for Infinite Scroll
+    const [scrollData, setScrollData] = useState(state.products.slice(0, 3));
+    const [startIndex, setStartIndex] = useState(3);
+
+    useEffect(() => {
+        setScrollData(state.products.slice(0, 3))
+        setStartIndex(3);
+    }, [state.products])
+
+    const fetchMoreData = () => {
+        setTimeout(() => {
+            const endIndex = startIndex + 3;
+            setScrollData([...scrollData, ...state.products.slice(startIndex, endIndex)]);
+            setStartIndex(endIndex);
+        }, 1500);
+    };
+
+
 
     return (
-        <div className='products-container d-flex mt-4'>
+        <div id='scrollableDiv' className='products-container d-flex mt-4'>
             {/* Categories at left */}
             <div className='product-categories ps-4'>
                 <b className='muted'>Categories</b>
@@ -131,6 +161,9 @@ const Products = () => {
 
             {/*  products grid  */}
             <div className='d-flex flex-column mx-3' style={{ width: '-webkit-fill-available' }}>
+                <FormControlLabel control={<Switch />} label="Infinite Scroll" size="small" onChange={handleInfinite}
+                    className='align-self-end' />
+
                 <div className='filters '>
 
                     {/* Price range */}
@@ -161,6 +194,7 @@ const Products = () => {
                                 <option value="3">Rating: High to Low</option>
                                 <option value="4">Rating: Low to High</option>
                             </select>
+                            {/* <Switch defaultChecked /> */}
                         </div>
                     </div>
                 </div>
@@ -168,9 +202,6 @@ const Products = () => {
 
 
                 <div className='options-resp'>
-                    {/* <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        Link with href
-                    </a> */}
                     <a class="filter-btn fw-bold" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                         <FaFilter className='filter-icon' /> &nbsp;&nbsp;Filter
                     </a>
@@ -230,18 +261,48 @@ const Products = () => {
 
                 </div>
 
+                {/* if isInfiniteToggle == false, then show all products, else infinite scroll */}
+                {!isInfiniteToggle &&
+                    <div className='products-grid my-3'>
 
-                <div className='products-grid my-3'>
+                        {state.products && state.products.map((item) => (
+                            <Link to={`/${item.id}`} className='link-style'>
+                                <ProductItem key={item.id} id={item.id} title={item.title} price={item.price} description={item.description} category={item.category} image={item.image} rating={item.rating} />
+                            </Link>
+                        ))}
 
-                    {/* Products */}
-                    {state.products && state.products.map((item) => (
-                        <Link to={`/${item.id}`} className='link-style'>
-                            <ProductItem key={item.id} id={item.id} title={item.title} price={item.price} description={item.description} category={item.category} image={item.image} rating={item.rating} />
-                        </Link>
-                    ))}
+                    </div>
+                }
 
-                    <Outlet />
-                </div>
+                {isInfiniteToggle && state.products.length > 0 &&
+                    <InfiniteScroll
+                        dataLength={scrollData.length}
+                        next={fetchMoreData}
+                        hasMore={scrollData.length < state.products.length}
+                        loader={
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        }
+                        scrollableTarget="scrollableDiv"
+                        className='mb-5'
+                    >
+                        <div className='products-grid my-3'>
+                            {scrollData.map((item) => (
+                                <Link to={`/${item.id}`} className='link-style' key={item.id}>
+                                    <ProductItem key={item.id} id={item.id} title={item.title} price={item.price} description={item.description} category={item.category} image={item.image} rating={item.rating} />
+
+                                </Link>
+                            ))}
+                        </div>
+                    </InfiniteScroll>
+                }
+
+
+                <Outlet />
+                {/* </div> */}
             </div>
 
         </div>

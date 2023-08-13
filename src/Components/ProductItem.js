@@ -16,7 +16,7 @@ const ProductItem = () => {
 
     return (
         <div className='product-item-container d-flex justify-content-center mt-3'>
-            <img className='product-item-img ' src={product.image}></img>
+            <img className='product-item-img ' src={product.image} alt='product_image'></img>
             <ProductRightDetails product={product} />
         </div>
     )

@@ -5,7 +5,7 @@ import Divider from '@mui/material/Divider';
 
 import { Box, IconButton } from '@mui/material';
 import { AddShoppingCart, Favorite } from '@mui/icons-material';
-import {AiOutlineHeart} from 'react-icons/ai'
+import { AiOutlineHeart } from 'react-icons/ai'
 
 
 const ProductRightDetails = ({ product }) => {
@@ -30,7 +30,7 @@ const ProductRightDetails = ({ product }) => {
             <div className='mt-3'>
                 <b className='small '>SELECT SIZE</b>
 
-                <div className='d-flex'>
+                <div className='select-size d-flex flex-wrap justify-content-center'>
 
                     <Box
                         p={3} // Padding
@@ -61,36 +61,39 @@ const ProductRightDetails = ({ product }) => {
                     >
                         L
                     </Box>
-                    <Box
-                        p={3} // Padding
-                        m={2} // Margin
-                        border={1}
-                        borderRadius={1}
-                        borderColor="#000000"
-                    >
-                        XL
-                    </Box>
-                    <Box
-                        p={3} // Padding
-                        m={2} // Margin
-                        border={1}
-                        borderRadius={1}
-                        borderColor="#cccccc"
-                        color="#cccccc"
-                    >
-                        2XL
-                    </Box>
+                    <div className='d-flex'>
+
+                        <Box
+                            p={3} // Padding
+                            m={2} // Margin
+                            border={1}
+                            borderRadius={1}
+                            borderColor="#000000"
+                        >
+                            XL
+                        </Box>
+                        <Box
+                            p={3} // Padding
+                            m={2} // Margin
+                            border={1}
+                            borderRadius={1}
+                            borderColor="#cccccc"
+                            color="#cccccc"
+                        >
+                            2XL
+                        </Box>
+                    </div>
                 </div>
             </div>
 
             <div className='mt-3'>
                 <b className='text-danger small'>FEW LEFT</b>
                 <div className='d-flex'>
-                    <Box 
-                    // marginRight={2}
-                    // className='p-3'
-                    padding={'0.8rem 2rem 0.8rem 1rem'}
-                    backgroundColor={'#ffc524'}
+                    <Box
+                        // marginRight={2}
+                        // className='p-3'
+                        padding={'0.8rem 2rem 0.8rem 1rem'}
+                        backgroundColor={'#ffc524'}
                     >
                         <IconButton color="primary" aria-label="Add to Bag">
                             {/* <PiShoppingBag color='black'/> */}
@@ -99,13 +102,13 @@ const ProductRightDetails = ({ product }) => {
                         <span className='small fw-bold'>ADD TO BAG</span>
                     </Box>
                     <Box
-                    className='ms-2'
-                    padding={'0.8rem 2rem 0.8rem 1rem'}
-                    border={'2px solid #cccccc'}
+                        className='ms-2'
+                        padding={'0.8rem 2rem 0.8rem 1rem'}
+                        border={'2px solid #cccccc'}
                     >
                         <IconButton color="secondary" aria-label="Add to Wishlist">
                             {/* <Favorite style={{ color: 'black' }}/> */}
-                            <AiOutlineHeart color='#999999'/>
+                            <AiOutlineHeart color='#999999' />
                         </IconButton>
                         <span className='small fw-bold'>Add to Wishlist</span>
                     </Box>

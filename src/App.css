@@ -3,12 +3,12 @@
   color: inherit;
 }
 
-.c-pointer{
+.c-pointer {
   cursor: pointer;
 }
 
 
-/*  Products.js  */
+/*  --- Products.js ---  */
 .products-grid {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -16,14 +16,18 @@
   row-gap: 0.8rem;
   column-gap: 0.5rem;
 
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 
 }
 
-/*  Select CSS  */
-.products-container{
+.products-container {
   position: relative;
-  height: 90vh;
+  max-height: 90vh;
+  overflow-y: scroll;
+}
+
+.infinite-scroll-component{
+  overflow: inherit !important;
 }
 
 /*  ProductCard.js  */
@@ -69,90 +73,10 @@
   color: #bebebe;
 }
 
-/* product-item */
-.product-item-container img,
-.product-item-container > div {
-  width: 30%;
-}
 
-.product-item-container img {
-  /* position: sticky; */
-  height: fit-content;
-}
+/* Items in responsive design */
 
-/* product-item-details */
-.product-item-details .title {
-  color: #5f5f5f;
-}
-.product-item-details .description {
-  color: #8b8b8b;
-  font-size: 1.1rem;
-}
-.product-item-details .rating {
-  background-color: rgb(216, 216, 216);
-  padding: 0.3rem 0.6rem 0.4rem 0.4rem;
-  border: 1px solid black;
-}
-
-
-/* ------ */
-.product-categories-resp-flex {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 80vw;
-}
-
-.category-flex-item {
-  width: calc(50% - 10px); /* Adjust the width as needed */
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-
-/* --- responsiveness --- */
-.options-resp{
-  display: none;
-}
-
-
-@media (max-width: 1200px) {
-  .product-categories{
-    display: none;
-  }
-
-  .filters{
-    display: none !important;
-  }
-
-  .product-categories-resp{
-    display: block;
-  }
-
-
-  .options-resp{
-    display: block;
-  }
-}
-
-@media (max-width: 920px) {
-  .products-grid {
-    display: grid;
-    grid-template-columns: auto auto;
-  }
-}
-
-@media (max-width: 610px) {
-  .products-grid {
-    display: grid;
-    grid-template-columns: auto;
-  }
-}
-
-
-
-
-.options-container { 
+.options-container {
   padding: 10px;
   background-color: #f8f8f8;
   border-bottom: 1px solid #ddd;
@@ -171,7 +95,118 @@
   cursor: pointer;
   transition: background-color 0.3s;
 
-
-  /* max-width: 80vw; */
   margin: 0 auto;
+}
+
+
+
+/* --- ProductItem.js --- */
+
+.product-item-container img,
+.product-item-container>div {
+  width: 30%;
+}
+
+.product-item-container img {
+  /* position: sticky; */
+  height: fit-content;
+}
+
+/* product-item-details */
+.product-item-details .title {
+  color: #5f5f5f;
+}
+
+.product-item-details .description {
+  color: #8b8b8b;
+  font-size: 1.1rem;
+}
+
+.product-item-details .rating {
+  background-color: rgb(216, 216, 216);
+  padding: 0.3rem 0.6rem 0.4rem 0.4rem;
+  border: 1px solid black;
+}
+
+
+
+/* ------ Responsiveness ------ */
+.product-categories-resp-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 80vw;
+}
+
+.category-flex-item {
+  width: calc(50% - 10px);
+  /* Adjust the width as needed */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.select-size{
+  max-width: 95vw;
+  overflow: hidden;
+}
+
+/* --- responsiveness --- */
+.options-resp {
+  display: none;
+}
+
+
+@media (max-width: 1200px) {
+  .product-categories {
+    display: none;
+  }
+
+  .filters {
+    display: none !important;
+  }
+
+  .product-categories-resp {
+    display: block;
+  }
+
+
+  .options-resp {
+    display: block;
+  }
+
+  /* ProductItem.js */
+  .product-item-container img,
+  .product-item-container>div {
+    width: 40%;
+  }
+}
+
+@media (max-width: 920px) {
+  .products-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 610px) {
+  .products-grid {
+    display: grid;
+    grid-template-columns: auto;
+  }
+
+  /* ProductItem.js */
+  .product-item-container {
+    align-items: center;
+    flex-direction: column !important;
+  }
+
+  .product-item-container img{
+    /* width: 70%; */
+    width: 70vw;
+  }
+  .product-item-container>div {
+    /* width: 100%; */
+    width: 95vw;
+    margin-top: 1rem;
+  }
 }
